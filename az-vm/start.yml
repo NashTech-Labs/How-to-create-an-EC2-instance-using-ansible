@@ -1,0 +1,15 @@
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+        - credentials
+  tasks:
+    - name: Running aws Role
+      include_role:
+        name: aws
+
+- hosts: ec2
+  gather_facts: no
+  tasks:
+    - name: create ec2 instance
+      include_role:
+        name: new-instance

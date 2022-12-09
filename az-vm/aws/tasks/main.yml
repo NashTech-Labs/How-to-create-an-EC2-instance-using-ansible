@@ -1,0 +1,28 @@
+---
+# tasks file for ec2
+- name: Creating Security Group for ec2 instance
+  ec2_group:
+    name: "{{ security_group_name }}"
+    description: Security Group for traffic
+    region: "{{ region_name }}"
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+    rules:
+    - proto: all
+      cidr_ip: 0.0.0.0/0
+- name: Launch An EC2 instance on AWS
+  ec2:
+    key_name: "{{ key_pair }}"
+    instance_type: "{{ instance_flavour }}"
+    image: "{{ ami_id }}"
+    wait: true
+    group: "{{ security_group_name }}"
+    count: 1
+    vpc_subnet_id: "{{ subnet_name }}"
+    assign_public_ip: yes
+    region: "{{ region_name }}"
+    state: present
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+    instance_tags:
+      Name: "new-instance"

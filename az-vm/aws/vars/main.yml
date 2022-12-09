@@ -1,0 +1,8 @@
+---
+# vars file for ec2
+security_group_name: Allow_All_SECURITY_GROUP
+region_name: ap-south-1
+subnet_name: subnet-04a0030fea739d723
+ami_id: ami-01216e7612243e0ef
+key_pair: ansible
+instance_flavour: t2.micro
